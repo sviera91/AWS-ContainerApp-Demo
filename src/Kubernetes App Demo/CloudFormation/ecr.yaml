@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Deployment of ECR (container registry)
+Metadata: 
+  rContainerRegistry:
+    Description: Properties of ECR resource
+Parameters: 
+  ECRRepositoryName:
+    Type: String
+    AllowedPattern: ^[a-z]+([a-z\d\-]*[a-z\d\/]*[a-z\d])*$
+    Description: Name of the ECR repository. Use format "repo-name/image-name".
+
+Resources: 
+  rContainerRegistry:
+    Type: AWS::ECR::Repository
+    Properties: 
+      LifecyclePolicy:
+        LifecyclePolicyText: '{
+    "rules": [
+        {
+            "rulePriority": 1,
+            "description": "Expire images older than 14 days",
+            "selection": {
+                "tagStatus": "untagged",
+                "countType": "sinceImagePushed",
+                "countUnit": "days",
+                "countNumber": 30
+            },
+            "action": {
+                "type": "expire"
+            }
+        }
+    ]
+}'
+      RepositoryName: !Ref ECRRepositoryName
+
+Outputs:
+  Uri:
+    Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com
+  ARN:
+    Value: !GetAtt rContainerRegistry.Arn

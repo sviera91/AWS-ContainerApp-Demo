@@ -1,5 +1,49 @@
 <html>
+    <head>
+        <title>Container WebApp Demo</title>
+    </head>
+    <style>
+        html{
+            background-color: white;
+        }
+        h1 {
+            font-size: 4em;
+            font-family: Segoe UI Light,Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+            color: darkslateblue;
+            padding-top: 250px;
+            padding-right: 30px;
+            padding-bottom: 50px;
+            padding-left: 80px;
+        }
+        div {
+            width: 400px;
+            height: 350px;
+            background: url('https://raw.githubusercontent.com/sviera91/WebApp-Example/master/bunny.gif') left bottom no-repeat;
+            position: absolute;
+            -webkit-animation: mymove 20s infinite; /* Chrome, Safari, Opera */
+            animation: mymove 20s infinite;
+        }
+        /* Chrome, Safari, Opera */
+        #div1 {-webkit-animation-timing-function: linear;}
+        
+        /* Standard syntax */
+        #div1 {animation-timing-function: linear;}
+        
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes mymove {
+            from {left: -200px;}
+            to {left: 1500px;}
+        }
+        /* Standard syntax */
+        @keyframes mymove {
+            from {left: -200px;}
+            to {transition: ease-out; left: 1600px;}
+        }
+    </style>    
     <body>
-        <p>Hello World!</p>
+    <p><h1><center>Hello Hello Hello!</center></h1><p>
+
+    <div id="div1"></div>
+
     </body>
-</html>
+</html>            

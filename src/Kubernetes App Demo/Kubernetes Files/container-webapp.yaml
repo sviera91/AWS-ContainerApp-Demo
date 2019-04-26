@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: container-webapp
+spec:
+  replicas: 2
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: container-webapp
+    spec:
+      containers:
+      - name: container-webapp
+        image: 068572557387.dkr.ecr.us-east-1.amazonaws.com/container-demo/webapp:v1
+        ports:
+        - containerPort: 80
+          name: 
+        imagePullPolicy: Always
